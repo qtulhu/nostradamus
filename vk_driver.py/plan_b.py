@@ -7,14 +7,14 @@ import requests
 import json
 import ast
 import datetime
+import dateutil.relativedelta
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
 
 start_time = time.time()
 
-token = "vk1.a.0m-Zzigbpf6GYYx9SxmlHlbeVv1iFbc9pQahRwg8NCAsGHs6wja3MHOv6AnJy2J19lAl6pQaXUBAGP7juoe6YYxtbvb5GcOuETpEcdWdNfd2CM53o6ZvqGHerob-nw_GKWCwkWWEyQ-Itkf4uwu9yebqxn3O2pASm3i1wZWRVT6PXBpZ7qL-6oh4H_u2jnOn"
-
+token = "vk1.a.piJJdmqvqrFBwsZobsP2OsGwV5tfOm26Y-l4D2aLFglZGIl2LamgHOECZJw0p7fzGPfhqEdNt6fws5X81PifbVJUM52CwYgqcySVE6M4C3yCU8RO5DTVrI1PjHuV2ggvwYLlp4OmXLkdD3b5LAQ3vRvM4k_pr9cCdgHRs_vFR_Cu4dS1BKsVwNOjKIxllRt2"
 conector = vk.api.Session(access_token=token)
 vkapi = vk.API(conector)
 data = vkapi.groups.search(q='кооператив',v='5.131',offset=0,sort=6,count=1000)
@@ -55,7 +55,7 @@ def listToStringRequests(s):
 def get_members_from_gr(gr_id):
     members = vkapi.groups.getMembers(v='5.131',group_id=gr_id,fields=['last_seen','bdate','sex'],count=500)
     print('was ----- ',members['count'])
-    if members['count'] < 6000:
+    if members['count'] < 700:
         return pd.DataFrame()
     pages = list(range(0, members['count'], 1000))
     count_code_blocks = math.ceil(len(pages)/25)
@@ -118,7 +118,7 @@ def get_usr_g():
             print(e)
 
         if members.empty:
-            all_users = pd.concat(all_res)
+            all_users = pd.concat(all_res,ignore_index=True)
             return all_users
 
         all_res.append(members)
@@ -128,37 +128,29 @@ def get_usr_g():
 
 
 
+
+#############################################
 # data = get_members_from_gr(207593202)
-
-
-
-
-#############################################
-usr = get_usr_g()
+# usr = get_usr_g()
 # usr.to_csv('data_hunter/usr_data_g.scv')
-
-print(usr)
 #############################################
 
 
+usr = pd.read_csv('data_hunter/usr_data_g.scv')
+usr['date_last_seen']= pd.to_datetime(usr['date_last_seen'])
+
+
+delta = datetime.datetime.now() - dateutil.relativedelta.relativedelta(months=1)
+usr = usr[(usr['date_last_seen'] > delta)]
+print(usr['group_id'].value_counts().nlargest(n=10))
 
 
 
 
-
-print("--- %s seconds ---" % (time.time() - start_time))
-
-
-
-
-
-# emp_df['date_last_seen'] = cp_counter
-# print(emp_df)
-# df2=filter.query("date_last_seen == 'Spark'")
-# # print(emp_df)
-#
 # my_string = "05.02.2022"
 # my_dt = datetime.datetime.strptime(my_string, '%d.%m.%Y')
-#
-# diff = my_dt-datetime.datetime.now()
-# print(diff.days)
+# diff = datetime.datetime.now().date() - my_dt.date()
+# print(diff)
+
+
+# print("--- %s seconds ---" % (time.time() - start_time))
