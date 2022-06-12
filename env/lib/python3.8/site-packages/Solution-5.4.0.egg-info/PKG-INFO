@@ -1,0 +1,75 @@
+Metadata-Version: 1.1
+Name: Solution
+Version: 5.4.0
+Summary: An amazing form solution
+Home-page: http://github.com/jpscaletti/solution
+Author: Juan-Pablo Scaletti
+Author-email: juanpablo@lucumalabs.com
+License: MIT license (see LICENSE)
+Description: ===============================
+        Solution
+        ===============================
+        
+        .. image:: https://badge.fury.io/py/Solution.png
+            :target: http://badge.fury.io/py/Solution
+        
+        .. image:: https://travis-ci.org/jpscaletti/solution.png?branch=master
+                :target: https://travis-ci.org/jpscaletti/solution
+        
+        .. image:: https://pypip.in/d/Solution/badge.png
+                :target: https://crate.io/packages/Solution?version=latest
+        
+        
+        An amazing form solution
+        
+        
+        Features
+        ====================================
+        
+        * Return validated data as dictionaries or create/update a linked model and child models.
+        * Sub-forms and form sets
+        * Extremely flexible in the field representation (defaulting to an HTML representation that might be good enough).
+        * Easy individual field or form-wide validators.
+        * Customizable cleanup functions.
+        
+        
+        
+        ______
+        
+        :copyright: `Juan-Pablo Scaletti <http://jpscaletti.com>`_.
+        :license: MIT, see LICENSE for more details.
+        
+        
+        .. :changelog:
+        
+        =============
+        History
+        =============
+        
+        2.x
+        +++++++++++++++++++++++++++++++++++++
+        
+        * Selects (and MultiSelects) can take groups of items and render them as ``<optgroup>`` or ``<fieldset>``.
+        
+        * The ``clean`` and `vprepare`` methods of a field can now be defined as a form method with the signature ``clean_fieldname(py_value, **kwargs)`` and ``prepare_fieldname(obj_value, **kwargs)``.
+        
+        * Added ``prepare`` and ``clean`` methods to the form so a user can overwrite them to store there the logic of pre and post-processing the data, keeping that logic in the form itself instead of in a view.
+        
+        * Several bugfixes
+        
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
