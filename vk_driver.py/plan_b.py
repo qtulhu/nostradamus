@@ -55,8 +55,8 @@ def listToStringRequests(s):
 def get_members_from_gr(gr_id):
     members = vkapi.groups.getMembers(v='5.131',group_id=gr_id,fields=['last_seen','bdate','sex'],count=500)
     print('was ----- ',members['count'])
-    if members['count'] < 4000:
-        return 'END'
+    if members['count'] < 6000:
+        return pd.DataFrame()
     pages = list(range(0, members['count'], 1000))
     count_code_blocks = math.ceil(len(pages)/25)
 
@@ -114,11 +114,10 @@ def get_usr_g():
             time.sleep(0.35)
             members = get_members_from_gr(id_group)
             print('id_group for get users', id_group)
-
         except Exception as e:
             print(e)
 
-        if members == 'END':
+        if members.empty:
             all_users = pd.concat(all_res)
             return all_users
 
@@ -136,9 +135,8 @@ def get_usr_g():
 
 #############################################
 usr = get_usr_g()
-usr.to_csv('data_hunter/usr_data_g.scv')
+# usr.to_csv('data_hunter/usr_data_g.scv')
 
-print("--- %s seconds ---" % (time.time() - start_time))
 print(usr)
 #############################################
 
