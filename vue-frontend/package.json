@@ -1,0 +1,57 @@
+{
+  "name": "nostradamus",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@johmun/vue-tags-input": "^2.1.0",
+    "@popperjs/core": "^2.11.5",
+    "@sipec/vue3-tags-input": "^3.0.4",
+    "@vueform/multiselect": "^2.4.2",
+    "ag-grid-community": "^27.3.0",
+    "ag-grid-vue3": "^27.3.0",
+    "axios": "^0.27.2",
+    "bootstrap": "^5.1.3",
+    "chart.js": "^3.8.0",
+    "chartjs": "^0.3.24",
+    "core-js": "^3.8.3",
+    "mdb-vue-ui-kit": "^1.14.0",
+    "vue": "^3.2.13",
+    "vue-chartjs": "^4.1.1",
+    "vue-multiselect": "^2.1.6",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@babel/eslint-parser": "^7.12.16",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-vue": "^8.0.3"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/vue3-essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "@babel/eslint-parser"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ]
+}
