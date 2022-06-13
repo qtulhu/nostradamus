@@ -2,8 +2,10 @@ from fastapi import FastAPI, Depends
 
 from auth import get_current_username
 
-from service import OperationsService
-from models import Person
+from fastapi.middleware.cors import CORSMiddleware
+
+import service
+from models import *
 
 app = FastAPI(
     title='Nostradamus',
@@ -13,29 +15,32 @@ app = FastAPI(
     openapi_url = '/nostradamus/openapi.json'
 )
 
-@app.get('/nostradamus/baza')
+@app.get('/nostradamus/{topic}')
 def test(
-username: str = Depends(get_current_username),
-operations_service: OperationsService = Depends()):
-    return operations_service.get_data()
-
-@app.post('/nostradamus/baza')
-def baza(
-params: Person,
-username: str = Depends(get_current_username),
-operations_service: OperationsService = Depends()):
-    return 0
-
-@app.post('/nostradamus/ca')
-def ca(
-params: Person,
-username: str = Depends(get_current_username),
- operations_service: OperationsService = Depends()):
-    return 0
-
-
-@app.post('/nostradamus/top')
-def top(
-params: Person,
+topic: str,
 username: str = Depends(get_current_username)):
-    return 0
+    return service.get_data_from_vk(topic)
+
+@app.post('/nostradamus/')
+def main_request(
+params: MainRequest,
+username: str = Depends(get_current_username)):
+    print(params)
+    data = service.main_service1(params)
+    return data
+
+origins = [
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:8080",
+    "http://10.0.36.22:8080"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)

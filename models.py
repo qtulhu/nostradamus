@@ -14,6 +14,20 @@ class Person(BaseModel):
     region: str
     cash: int
 
+class AgeRange(BaseModel):
+    ageBegin: int
+    ageEnd: int
+
+class MoneyRange(BaseModel):
+    moneyBegin: int
+    moneyEnd: int
+
+class MainRequest(BaseModel):
+    sex: list
+    age: list
+    cash: list
+    interest: list
+
 
 class DataBaseModel(BaseModel):
     id: int
